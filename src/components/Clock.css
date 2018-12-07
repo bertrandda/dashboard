@@ -1,0 +1,22 @@
+.module {
+    height: inherit;
+    width: inherit;
+    background-color: #282c34;
+    color: white;
+    padding-top: 1px;
+    text-align: center;
+}
+
+.time {
+    font-size: 3em;
+    margin-top: 30px;
+}
+
+.format-container {
+    margin: 10px;
+}
+
+.submit-button {
+    padding: 5px 15px 5px 15px;
+    margin: 10px;
+}
