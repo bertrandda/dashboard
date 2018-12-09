@@ -1,6 +1,9 @@
 {
-  "name": "react-dashboard",
+  "name": "dashboard",
   "version": "0.1.0",
+  "author": "Bertrand d'Aure",
+  "description": "Your custom dashboard",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@mdi/js": "^3.2.89",
