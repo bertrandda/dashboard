@@ -9,6 +9,12 @@ h2 {
     margin: 5px 10px 5px 10px;
     border: 1px solid #dddddd;
     position: relative;
+    transition: 1s;
+    transform-style: preserve-3d;
+}
+
+.container-back {
+    transform: rotateY(180deg);
 }
 
 .type-icon {
@@ -19,6 +25,7 @@ h2 {
     position: absolute;
     margin: 5px;
     right: 0;
+    z-index: 50;
 }
 
 .module-icon {

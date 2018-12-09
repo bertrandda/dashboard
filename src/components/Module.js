@@ -27,13 +27,17 @@ export default class Module extends Component {
                 </div>
             );
         } else {
+            let classContainer = 'container';
+            // if(!this.state.settingFace) classContainer += ' container-front';
+            if(this.state.settingFace) classContainer += ' container-back';
+            
             return (
-                <div className="container">
+                <div className={classContainer}>
+                    {this.state.module}
                     <div className="module-icon-container">
                         <Icon className="module-icon" onClick={() => this.toggleSettingFace(!this.state.settingFace)} path={mdiSettings} size={0.5} />
                         <Icon className="module-icon" onClick={() => this.deleteModule()} path={mdiDelete} size={0.5} />
                     </div>
-                    {this.state.module}
                 </div>
             );
         }
@@ -54,7 +58,7 @@ export default class Module extends Component {
 
     saveModule = (data) => {
         if (!this.deleted) {
-            localStorage.setItem(this.props.idKey, JSON.stringify({type: this.state.type, ...data}));
+            localStorage.setItem(this.props.idKey, JSON.stringify({ type: this.state.type, ...data }));
         }
     }
 

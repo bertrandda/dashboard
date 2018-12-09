@@ -20,11 +20,12 @@ export default class Clock extends Component {
     }
 
     render() {
-        if (this.props.settingFace) {
-            return this.renderSettings();
-        } else {
-            return this.renderDisplay();
-        }
+        return (
+            <span style={{ width: 'inherit', height: 'inherit' }}>
+                {this.renderDisplay()}
+                {this.renderSettings()}
+            </span>
+        );
     }
 
     componentDidMount() {
@@ -41,9 +42,24 @@ export default class Clock extends Component {
         clearInterval(this.interval);
     }
 
-    renderSettings = () => {
+    renderDisplay = () => {
+        let classNames = "card-face card-face-front";
+        if (!this.props.settingFace) classNames += " first-card-face"
+        else classNames += " second-card-face" ;
         return (
-            <div className="module">
+            <div className={classNames}>
+                <h2>{this.state.timezone}</h2>
+                <div className="time">{this.state.time}</div>
+            </div>
+        );
+    }
+
+    renderSettings = () => {
+        let classNames = "card-face card-face-back";
+        if (this.props.settingFace) classNames += " first-card-face"
+        else classNames += " second-card-face";
+        return (
+            <div className={classNames}>
                 <h2>Settings</h2>
                 <form onSubmit={this.handleSubmit}>
                     <select name="timezone" defaultValue={this.state.timezone}>
@@ -61,15 +77,6 @@ export default class Clock extends Component {
                     </div>
                     <input className="submit-button" type="submit" value="Save" />
                 </form>
-            </div>
-        );
-    }
-
-    renderDisplay = () => {
-        return (
-            <div className="module">
-                <h2>{this.state.timezone}</h2>
-                <div className="time">{this.state.time}</div>
             </div>
         );
     }
