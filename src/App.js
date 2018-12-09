@@ -1,27 +1,60 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
+import Icon from '@mdi/react';
+import { mdiPlus } from '@mdi/js';
+
 import './App.css';
 
+import Module from './components/Module';
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modules: []
+    };
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {this.state.modules}
+        <Icon className="floating-button" onClick={this.addModule} path={mdiPlus} size={2} color="white" />
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.loadModules();
+  }
+
+  loadModules = () => {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const value = JSON.parse(localStorage.getItem(key));
+      this.setState(prevState => ({
+        modules: [...prevState.modules, React.createElement(Module, { key: key, idKey: key, type: value.type, data: value.data, delete: this.deleteModule })]
+      }))
+    }
+  }
+
+  addModule = () => {
+    const newKey = this.generateKey();
+    this.setState(prevState => ({
+      modules: [...prevState.modules, React.createElement(Module, { key: newKey, idKey: newKey, delete: this.deleteModule })]
+    }))
+  }
+
+  deleteModule = (idToDelete) => {
+    this.setState(prevState => ({
+      modules: prevState.modules.filter(mod => mod.props.idKey !== idToDelete)
+    }));
+    localStorage.removeItem(idToDelete);
+  }
+
+  generateKey = () => {
+    let S4 = () => { return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1) };
+    return (S4() + S4());
   }
 }
 
