@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
 import Clock from './Clock';
+import Notes from './Notes';
 
-import { mdiClock, mdiSettings, mdiDelete } from '@mdi/js'
+import { mdiClock, mdiSettings, mdiDelete, mdiClipboardText } from '@mdi/js'
 
 import './Module.css'
 import Icon from '@mdi/react';
@@ -24,13 +25,14 @@ export default class Module extends Component {
             return (
                 <div className="container">
                     <Icon className="type-icon" onClick={() => this.setModuleType('CLOCK')} path={mdiClock} size={1} />
+                    <Icon className="type-icon" onClick={() => this.setModuleType('NOTES')} path={mdiClipboardText} size={1} />
                 </div>
             );
         } else {
             let classContainer = 'container';
             // if(!this.state.settingFace) classContainer += ' container-front';
-            if(this.state.settingFace) classContainer += ' container-back';
-            
+            if (this.state.settingFace) classContainer += ' container-back';
+
             return (
                 <div className={classContainer}>
                     {this.state.module}
@@ -49,6 +51,7 @@ export default class Module extends Component {
                 module: React.createElement(Clock, { idKey: this.props.idKey, data: this.props.data, ...this.state })
             })
         }
+        if (this.props.data) this.setModuleType(this.props.type);
     }
 
     deleteModule = () => {
@@ -64,20 +67,26 @@ export default class Module extends Component {
 
     setModuleType = (type) => {
         // Create save
-        localStorage.setItem(this.props.idKey, '');
+        if (!this.props.data) localStorage.setItem(this.props.idKey, '');
+        let component;
         switch (type) {
             case 'CLOCK':
-                this.setState({
-                    type: type
-                }, () => {
-                    this.setState({
-                        module: React.createElement(Clock, { idKey: this.props.idKey, ...this.state })
-                    })
-                });
+                component = Clock;
+                break;
+            case 'NOTES':
+                component = Notes;
                 break;
             default:
                 console.log('Unknown module type');
         }
+
+        this.setState({
+            type: type
+        }, () => {
+            this.setState({
+                module: React.createElement(component, { idKey: this.props.idKey, data: this.props.data, ...this.state })
+            })
+        });
     }
 
     toggleSettingFace = (face) => {
