@@ -35,7 +35,7 @@ export default class Notes extends Component {
      */
     renderDisplay = () => {
         let classNames = `${styles['card-face']} ${styles['card-face-front']}`;
-        if (!this.props.settingFace) classNames += ` ${styles['first-card-face']}`
+        if (!this.props.settingFace) classNames += ` ${styles['first-card-face']}`;
         else classNames += ` ${styles['second-card-face']}`;
         return (
             <div className={classNames}>
@@ -50,7 +50,7 @@ export default class Notes extends Component {
      */
     renderSettings = () => {
         let classNames = `${styles['card-face']} ${styles['card-face-back']}`;
-        if (this.props.settingFace) classNames += ` ${styles['first-card-face']}`
+        if (this.props.settingFace) classNames += ` ${styles['first-card-face']}`;
         else classNames += ` ${styles['second-card-face']}`;
         return (
             <div className={classNames}>

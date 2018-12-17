@@ -6,7 +6,7 @@ import { now } from 'moment';
 import 'moment/locale/fr';
 import 'moment/locale/en-gb';
 
-import './Clock.css'
+import styles from './Clock.module.css';
 
 export default class Clock extends Component {
 
@@ -43,21 +43,21 @@ export default class Clock extends Component {
     }
 
     renderDisplay = () => {
-        let classNames = "card-face card-face-front";
-        if (!this.props.settingFace) classNames += " first-card-face"
-        else classNames += " second-card-face" ;
+        let classNames = `${styles['card-face']} ${styles['card-face-front']}`;
+        if (!this.props.settingFace) classNames += ` ${styles['first-card-face']}`;
+        else classNames += ` ${styles['second-card-face']}`;
         return (
             <div className={classNames}>
                 <h2>{this.state.timezone}</h2>
-                <div className="time">{this.state.time}</div>
+                <div className={styles['time']}>{this.state.time}</div>
             </div>
         );
     }
 
     renderSettings = () => {
-        let classNames = "card-face card-face-back";
-        if (this.props.settingFace) classNames += " first-card-face"
-        else classNames += " second-card-face";
+        let classNames = `${styles['card-face']} ${styles['card-face-back']}`;
+        if (this.props.settingFace) classNames += ` ${styles['first-card-face']}`;
+        else classNames += ` ${styles['second-card-face']}`;
         return (
             <div className={classNames}>
                 <h2>Settings</h2>
@@ -65,7 +65,7 @@ export default class Clock extends Component {
                     <select name="timezone" defaultValue={this.state.timezone}>
                         {moment.tz.names().map(this.itemTimezone)}
                     </select>
-                    <div className="format-container">
+                    <div className={styles['format-container']}>
                         <label>
                             12h
                                 <input type="radio" name="format" value="12h" defaultChecked={this.state.format === '12h'} />
@@ -75,7 +75,7 @@ export default class Clock extends Component {
                                 <input type="radio" name="format" value="24h" defaultChecked={this.state.format === '24h'} />
                         </label>
                     </div>
-                    <input className="submit-button" type="submit" value="Save" />
+                    <input className={styles['submit-button']} type="submit" value="Save" />
                 </form>
             </div>
         );
@@ -87,8 +87,9 @@ export default class Clock extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-
+        
         const data = new FormData(event.target);
+        console.log(data);
         this.setState({
             timezone: data.get('timezone'),
             format: data.get('format')
@@ -101,6 +102,7 @@ export default class Clock extends Component {
             moment.locale('fr');
         else
             moment.locale('en');
+        console.log(this.state.timezone);
         this.setState({ time: moment(now()).tz(this.state.timezone).format('LTS') });
     }
 }
