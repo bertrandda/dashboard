@@ -1,0 +1,57 @@
+.card-face {
+    position: absolute;
+    height: inherit;
+    width: inherit;
+    color: white;
+    padding-top: 1px;
+    text-align: center;
+}
+
+.first-card-face {
+    /* Replace backface-visibility because does not work on Firefox */
+    animation: bring-front 1s forwards;
+}
+
+.second-card-face {
+    /* Replace backface-visibility because does not work on Firefox */
+    animation: bring-back 1s forwards;
+}
+
+.card-face-front {
+    background-color: rgb(10, 140, 211);
+}
+
+.card-face-back {
+    background-color: rgb(10, 140, 211);
+    transform: scale(-1, 1);
+}
+
+.submit-button {
+    padding: 5px 15px 5px 15px;
+    margin: 10px;
+}
+
+.notes-text-area {
+    width: 90%;
+    height: 60%;
+    resize: none;
+    font-family: sans-serif;
+}
+
+@keyframes bring-front {
+    0% {
+      z-index: 0;
+    }
+    100% {
+      z-index: 1;
+    }
+}
+
+@keyframes bring-back {
+    0% {
+      z-index: 1;
+    }
+    100% {
+        z-index: 0;
+    }
+}
