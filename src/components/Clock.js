@@ -89,7 +89,6 @@ export default class Clock extends Component {
         event.preventDefault();
         
         const data = new FormData(event.target);
-        console.log(data);
         this.setState({
             timezone: data.get('timezone'),
             format: data.get('format')
@@ -102,7 +101,6 @@ export default class Clock extends Component {
             moment.locale('fr');
         else
             moment.locale('en');
-        console.log(this.state.timezone);
         this.setState({ time: moment(now()).tz(this.state.timezone).format('LTS') });
     }
 }

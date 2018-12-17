@@ -5,7 +5,7 @@ import Notes from './Notes';
 
 import { mdiClock, mdiSettings, mdiDelete, mdiClipboardText } from '@mdi/js'
 
-import './Module.css'
+import styles from './Module.module.css';
 import Icon from '@mdi/react';
 
 export default class Module extends Component {
@@ -23,22 +23,22 @@ export default class Module extends Component {
     render() {
         if (this.state.type === undefined) {
             return (
-                <div className="container">
-                    <Icon className="type-icon" onClick={() => this.setModuleType('CLOCK')} path={mdiClock} size={1} />
-                    <Icon className="type-icon" onClick={() => this.setModuleType('NOTES')} path={mdiClipboardText} size={1} />
+                <div className={styles['container']}>
+                    <Icon className={styles['type-icon']} onClick={() => this.setModuleType('CLOCK')} path={mdiClock} size={1} />
+                    <Icon className={styles['type-icon']} onClick={() => this.setModuleType('NOTES')} path={mdiClipboardText} size={1} />
                 </div>
             );
         } else {
-            let classContainer = 'container';
+            let classContainer = styles['container'];
             // if(!this.state.settingFace) classContainer += ' container-front';
-            if (this.state.settingFace) classContainer += ' container-back';
+            if (this.state.settingFace) classContainer += ` ${styles['container-back']}`;
 
             return (
                 <div className={classContainer}>
                     {this.state.module}
-                    <div className="module-icon-container">
-                        <Icon className="module-icon" onClick={() => this.toggleSettingFace(!this.state.settingFace)} path={mdiSettings} size={0.5} />
-                        <Icon className="module-icon" onClick={() => this.deleteModule()} path={mdiDelete} size={0.5} />
+                    <div className={styles['module-icon-container']}>
+                        <Icon className={styles['module-icon']} onClick={() => this.toggleSettingFace(!this.state.settingFace)} path={mdiSettings} size={0.5} />
+                        <Icon className={styles['module-icon']} onClick={() => this.deleteModule()} path={mdiDelete} size={0.5} />
                     </div>
                 </div>
             );
