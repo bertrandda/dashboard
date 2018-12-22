@@ -24,8 +24,8 @@ export default class Module extends Component {
         if (this.state.type === undefined) {
             return (
                 <div className={styles['container']}>
-                    <Icon className={styles['type-icon']} onClick={() => this.setModuleType('CLOCK')} path={mdiClock} size={1} />
-                    <Icon className={styles['type-icon']} onClick={() => this.setModuleType('NOTES')} path={mdiClipboardText} size={1} />
+                    <Icon id="clock-icon" className={styles['type-icon']} onClick={() => this.setModuleType('CLOCK')} path={mdiClock} size={1} />
+                    <Icon id="notes-icon" className={styles['type-icon']} onClick={() => this.setModuleType('NOTES')} path={mdiClipboardText} size={1} />
                 </div>
             );
         } else {
