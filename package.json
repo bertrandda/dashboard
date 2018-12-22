@@ -1,6 +1,7 @@
 {
   "name": "dashboard",
   "version": "0.1.0",
+  "homepage": "https://bertrandda.github.io/dashboard/",
   "author": "Bertrand d'Aure",
   "description": "Your custom dashboard",
   "license": "MIT",
