@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 
 import Clock from './Clock';
 import Notes from './Notes';
+import Calculator from './Calculator';
 
-import { mdiClock, mdiSettings, mdiDelete, mdiClipboardText } from '@mdi/js'
+import { mdiClock, mdiSettings, mdiDelete, mdiClipboardText, mdiCalculatorVariant } from '@mdi/js'
 
 import styles from './Module.module.css';
 import Icon from '@mdi/react';
@@ -26,6 +27,9 @@ export default class Module extends Component {
                 <div className={styles['container']}>
                     <Icon id="clock-icon" className={styles['type-icon']} onClick={() => this.setModuleType('CLOCK')} path={mdiClock} size={1} />
                     <Icon id="notes-icon" className={styles['type-icon']} onClick={() => this.setModuleType('NOTES')} path={mdiClipboardText} size={1} />
+                    <Icon className={styles['type-icon']} onClick={() => this.setModuleType('CLOCK')} path={mdiClock} size={1} />
+                    <Icon className={styles['type-icon']} onClick={() => this.setModuleType('NOTES')} path={mdiClipboardText} size={1} />
+                    <Icon className={styles['type-icon']} onClick={() => this.setModuleType('CALC')} path={mdiCalculatorVariant} size={1} />
                 </div>
             );
         } else {
@@ -75,6 +79,9 @@ export default class Module extends Component {
                 break;
             case 'NOTES':
                 component = Notes;
+                break;
+            case 'CALC':
+                component = Calculator;
                 break;
             default:
                 console.log('Unknown module type');
