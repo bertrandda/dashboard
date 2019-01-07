@@ -7,11 +7,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 * Install dependencies: `yarn install`
 * Run the developer server: `yarn start`
+* Run tests: `yarn test`
 * Create production build: `yarn build`
 
 ## Features
 
 * :clock4: World clocks
+* :pencil: Notes
+* :1234: Calculator
 
 ## Presentation
 
